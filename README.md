@@ -99,12 +99,12 @@ To disable CFG Lock you can either use a [quirk](https://dortania.github.io/Open
 ## Set DVMT pre-alloc to 64MB
 Next up we need to set the DVMT pre-alloc to 64MB, which macOS likes. Enter ```setup_var 0x263 0x2``` to change it. By default it's set to 0x1 which is 32MB. There are [more sizes](https://github.com/zearp/optihack/blob/master/text/CFGLock_DVMT.md) to set here; if you change it to anything else than 64MB you will need to change the ```framebuffer-stolenmem``` in the config.plist file as it needs to match. For example changing it to 92MB you'll have to set ```framebuffer-stolenmem``` to ```00000006```. I've tested larger pre-alloc sizes in a non-4k dual screen setup and while they work I did not notice any differences. Setting it to 64MB should be fine for pretty much everyone though.
 
-> Please note: Changing the pre-alloc size is not really needed but highly recommended, if you don't want to do this you ***must*** apply the DMVT pre-alloc 32MB patch found in Hackintool to the config or else you will get a panic on boot it may also mean using dual screen or high resolutions won't work.
+> Please note: Changing the pre-alloc size is not really needed but highly recommended, if you don't want to do this you ***must*** apply the DMVT pre-alloc 32MB patch found in Hackintool to the config or else you will get a panic on boot. It may also mean using dual screen or high resolutions won't work.
 
 ## Enable EHCI hand-off
 For usb to function as good as possible we need to enable handing off EHCx ports to the XHCI controller. We accomplish that by entering the following commands; ```setup_var 0x2 0x1``` and ```setup_var 0x144 0x1``` the first enables EHCI hand-off itself and the second one sets XHCI in normal enabled mode. It's needed because the default value called *Smart Auto* isn't so smart after all. So we simply enable it.
 
-Lastly we enable routing of the EHCx ports to XHCI ones and disable EHCx all together. Only legacy OS would need it and it also removes the need for the [EHCx_OFF patch](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl). Enter ```setup_var 0x15A 0x2``` to enable the routing then enter ```setup_var 0x146 0x0``` and ```setup_var 0x147 0x0``` to disable the EHCx ports. You can find these values [here](https://github.com/zearp/OptiHack/blob/master/text/XHCI_EHCI.md).
+Lastly we enable routing of the EHCx ports to XHCI ones and disable EHCx all together. Only legacy OS would need it. Enter ```setup_var 0x15A 0x2``` to enable the routing then enter ```setup_var 0x146 0x0``` and ```setup_var 0x147 0x0``` to disable the EHCx ports. You can find these values [here](https://github.com/zearp/OptiHack/blob/master/text/XHCI_EHCI.md).
 
 We're done. Exit the shell by running the ```reboot``` command. 
 
@@ -363,7 +363,7 @@ The ```pmset``` settings after install are:
 ### Logs
 * Boot logs, to get (early) boot logs execute ```log show --predicate 'process == "kernel"' --style syslog --source --last boot``` right after a reboot to get them. A good way to find errors regarding kext loading and such.
 * Cleaning logs, often it is nice to clean the logs when testing, execute ```sudo log erase --all``` to wipe them.
-* Debug logs and options are disabled where possible, this speeds up booting and helps performance. Debug logging and versions of software with debug symbols shouldn't be used in production. If you have issues booting OpenCore please re-enable debug logging as outlined [here](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html). This won't impact normal logging like boot logs or system logs. OF anything it makes them more readable as it won't have an overload of information.
+* Debug logs and options are disabled where possible, this speeds up booting and helps performance. Debug logging and versions of software with debug symbols shouldn't be used in production. If you have issues booting OpenCore please re-enable debug logging as outlined [here](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html). This won't impact normal logging like boot logs or system logs. If anything it makes them more readable as it won't have an overload of information.
 
 ### Misc.
 * OpenCore doesn't remember the last booted volume? Press ```control + enter``` to set a new default. Wiping NVRAM can also help cure this.
