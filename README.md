@@ -355,7 +355,7 @@ This works out of the box. You can enable it in the System Preferences app. If y
 
 ## Issues
 ### Resetting UEFI changes
-You have to remove the CMOS battery, short the ```RTCRST``` jumper and remove the ```PSWD``` jumper. Also remove the power chord and then hold the power button for 10-20 seconds (this drains all left over electricity so called ```flea power```). Now reconnect the power chord and wait for 30 seconds so the settings can be cleared. Now power up the machine. Everything should now be reset to stock values. Turn the machine off again and put the CMOS battery back in and set the jumpers back to how they were before. Now turn the machine back on and load BIOS defaults for good measure.
+You have to remove the CMOS battery, short the ```RTCRST``` jumper with the ``PSWD``` jumper. Also remove the power chord and then hold the power button for 10-20 seconds (this drains all left over electricity so called ```flea power```). Now reconnect the power chord and wait for 30 seconds so the settings can be cleared. Now power up the machine. Everything should now be reset to stock values. Turn the machine off again and put the CMOS battery back in and set the jumpers back to how they were before. Now turn the machine back on and load BIOS defaults again for good measure. Don't forget to re-do the [UEFI edits](#disable-cfg-lock).
 
 > Note: This is a mix of CMOS and jumper reset methods for maximum effect as just following the desktop guide on the Dell site didn't clear everything in my testing. Read more about it [here](https://www.dell.com/support/article/de-ch/sln284985/how-to-perform-a-bios-or-cmos-reset-and-or-clear-the-nvram-on-your-dell-system).
 
@@ -419,7 +419,7 @@ These are the apps I use and have used in my journey so far. Some more essential
 * [Meld](https://github.com/yousseb/meld) - Compare (and merge) everything! Sweet little diff tool.
 * [Monolingual](https://ingmarstein.github.io/Monolingual/) - Remove unused languages and architectures from apps. Yes I like it tidy!
 * [Onyx](https://titanium-software.fr/en/onyx.html) - Always seem to come in handy at some point or another.
-* [ProperTree](https://github.com/corpnewt/ProperTree) - OpenCore config editor and very useful for other plist editing too.
+* [ProperTree](https://github.com/corpnewt/ProperTree) - OpenCore config editor and very useful for other plist editing too ([darkmode](https://gist.github.com/zearp/9e0ebcc028b05d84223ddb4c84c62748) "howto").
 * [Transmission](https://transmissionbt.com/) - To download those Linux iso's. The "[nightly](https://build.transmissionbt.com/job/trunk-mac/)" builds have dark mode support.
 * [VLC](https://www.videolan.org) - Plays any media Cog can't.
 
